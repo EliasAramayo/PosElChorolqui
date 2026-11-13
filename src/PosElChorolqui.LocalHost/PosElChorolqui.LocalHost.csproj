@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\PosElChorolqui.Application\PosElChorolqui.Application.csproj" />
+    <ProjectReference Include="..\PosElChorolqui.Infrastructure\PosElChorolqui.Infrastructure.csproj" />
+    <ProjectReference Include="..\PosElChorolqui.Contracts\PosElChorolqui.Contracts.csproj" />
+    <ProjectReference Include="..\PosElChorolqui.Domain\PosElChorolqui.Domain.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+</Project>

@@ -426,3 +426,27 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+
+# ── PosElChorolqui Etapa 1 ──────────────────────────────────────────────
+# SQLite databases (never commit a database file with real data).
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Local configuration overrides with real secrets (recreate from *.example.json).
+appsettings.Development.json
+appsettings.local.json
+
+# Local publish / backup copies.
+*.bak
+* - copia.*
+publish-local/
+
+# KEEP: EF Core migrations (src/**/Migrations/**) and *.example.json files.
+!**/Migrations/**
+!*.example.json
+
+.atl/
