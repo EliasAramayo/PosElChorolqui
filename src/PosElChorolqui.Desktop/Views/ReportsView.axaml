@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.ReportsView"
+             x:DataType="vm:ReportsViewModel">
+  <StackPanel Spacing="20">
+    <shared:PageHeaderView Title="Reportes"
+                           Subtitle="Filtros por fecha y resultados. Los reportes estarán disponibles cuando haya operaciones registradas." />
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="cardTitle" Text="Filtros" />
+        <WrapPanel Orientation="Horizontal" ItemSpacing="12" LineSpacing="12">
+          <StackPanel Spacing="4" Width="220">
+            <TextBlock Classes="muted" Text="Fecha desde" />
+            <DatePicker SelectedDate="{Binding StartDate}" />
+          </StackPanel>
+          <StackPanel Spacing="4" Width="220">
+            <TextBlock Classes="muted" Text="Fecha hasta" />
+            <DatePicker SelectedDate="{Binding EndDate}" />
+          </StackPanel>
+          <Button Classes="primary"
+                  Content="Generar (próximamente)"
+                  IsEnabled="False"
+                  VerticalAlignment="Bottom" />
+        </WrapPanel>
+      </StackPanel>
+    </Border>
+
+    <WrapPanel Orientation="Horizontal" ItemSpacing="16" LineSpacing="16">
+      <Border Classes="card" Width="320">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Total de ventas" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="Sin datos disponibles." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Ticket promedio" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="Sin datos disponibles." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Productos destacados" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="Sin datos disponibles." />
+        </StackPanel>
+      </Border>
+    </WrapPanel>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="cardTitle" Text="Evolución de ventas" />
+        <Border Classes="chartZone">
+          <shared:EmptyStateView Glyph="◇"
+                                 Message="Sin datos disponibles para el gráfico."
+                                 Hint="El gráfico aparecerá cuando haya operaciones registradas." />
+        </Border>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

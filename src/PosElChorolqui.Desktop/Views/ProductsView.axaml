@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.ProductsView"
+             x:DataType="vm:ProductsViewModel">
+  <StackPanel Spacing="20">
+    <!-- Clear action bar: title on the left, primary action on the right. -->
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+      <shared:PageHeaderView Title="Productos"
+                             Subtitle="Catálogo de productos. La gestión completa estará disponible en una etapa posterior." />
+      <Button Classes="primary"
+              Grid.Column="1"
+              Content="Agregar producto (próximamente)"
+              IsEnabled="False"
+              VerticalAlignment="Center" />
+    </Grid>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <!-- Filters and search. -->
+        <Grid ColumnDefinitions="*,220,Auto" ColumnSpacing="10">
+          <TextBox Classes="field"
+                   Text="{Binding SearchText}"
+                   TabIndex="0"
+                   PlaceholderText="Buscar por nombre o código…" />
+          <ComboBox Classes="field"
+                    Grid.Column="1"
+                    IsEnabled="False"
+                    SelectedIndex="0"
+                    ToolTip.Tip="El filtro por categoría estará disponible en una etapa posterior.">
+            <ComboBoxItem Content="Todas las categorías" />
+          </ComboBox>
+          <Button Classes="secondary"
+                  Grid.Column="2"
+                  Content="Limpiar"
+                  Command="{Binding ClearFiltersCommand}" />
+        </Grid>
+
+        <!-- Table with aligned columns; horizontally scrollable on narrow windows. -->
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+          <StackPanel Spacing="0" MinWidth="680">
+            <Border Classes="tableHeader">
+              <Grid ColumnDefinitions="130,*,190,130,110,120">
+                <TextBlock Classes="tableHeaderText" Text="Código" />
+                <TextBlock Classes="tableHeaderText" Grid.Column="1" Text="Nombre" />
+                <TextBlock Classes="tableHeaderText" Grid.Column="2" Text="Categoría" />
+                <TextBlock Classes="tableHeaderRight" Grid.Column="3" Text="Precio" />
+                <TextBlock Classes="tableHeaderRight" Grid.Column="4" Text="Stock" />
+                <TextBlock Classes="tableHeaderRight" Grid.Column="5" Text="Acciones" />
+              </Grid>
+            </Border>
+            <StackPanel Margin="0,20">
+              <shared:EmptyStateView Glyph="□"
+                                     Message="Sin productos registrados."
+                                     Hint="Utilice «Agregar producto» cuando la gestión esté disponible." />
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+
+        <TextBlock Classes="caption"
+                   Text="La gestión completa del catálogo estará disponible en una etapa posterior." />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

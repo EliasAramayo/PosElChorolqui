@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using PosElChorolqui.Desktop.Services;
 using PosElChorolqui.Desktop.ViewModels;
 using PosElChorolqui.Desktop.Views;
 
@@ -18,6 +19,9 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        // Merge the default (light) theme before any window resolves its resources.
+        AppThemeService.Apply(false);
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var viewModel = Program.Services.GetRequiredService<MainViewModel>();

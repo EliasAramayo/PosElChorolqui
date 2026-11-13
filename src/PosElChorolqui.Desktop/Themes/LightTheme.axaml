@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Marker used by AppThemeService to find and replace the active theme dictionary. -->
+  <x:String x:Key="AppThemeMarker">Light</x:String>
+
+  <SolidColorBrush x:Key="AppBackgroundBrush">#F4F5F7</SolidColorBrush>
+  <SolidColorBrush x:Key="AppSurfaceBrush">#FFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="CardBackgroundBrush">#FFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="CardBorderBrush">#E2E6EA</SolidColorBrush>
+  <SolidColorBrush x:Key="PrimaryBrush">#1B7A6E</SolidColorBrush>
+  <SolidColorBrush x:Key="PrimaryHoverBrush">#15665C</SolidColorBrush>
+  <SolidColorBrush x:Key="PrimaryPressedBrush">#0F5148</SolidColorBrush>
+  <SolidColorBrush x:Key="OnPrimaryBrush">#FFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="AccentSoftBrush">#E2F0ED</SolidColorBrush>
+  <SolidColorBrush x:Key="NavHoverBrush">#ECEFF1</SolidColorBrush>
+  <SolidColorBrush x:Key="TextPrimaryBrush">#1A2226</SolidColorBrush>
+  <SolidColorBrush x:Key="TextSecondaryBrush">#68727A</SolidColorBrush>
+  <SolidColorBrush x:Key="SuccessBrush">#2E7D32</SolidColorBrush>
+  <SolidColorBrush x:Key="WarningBrush">#A86E14</SolidColorBrush>
+  <SolidColorBrush x:Key="DangerBrush">#C0392B</SolidColorBrush>
+  <SolidColorBrush x:Key="DangerHoverBrush">#A93226</SolidColorBrush>
+  <SolidColorBrush x:Key="DangerPressedBrush">#922B21</SolidColorBrush>
+  <SolidColorBrush x:Key="OnDangerBrush">#FFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="DangerSoftBrush">#F6E3E0</SolidColorBrush>
+  <SolidColorBrush x:Key="FocusBorderBrush">#0F5148</SolidColorBrush>
+  <SolidColorBrush x:Key="HeaderBackgroundBrush">#FFFFFF</SolidColorBrush>
+  <SolidColorBrush x:Key="TableHeaderBrush">#EEF1F4</SolidColorBrush>
+</ResourceDictionary>

@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.InventoryView"
+             x:DataType="vm:InventoryViewModel">
+  <StackPanel Spacing="20">
+    <shared:PageHeaderView Title="Inventario"
+                           Subtitle="Movimientos de existencias. El control de stock estará disponible en una etapa posterior." />
+
+    <WrapPanel Orientation="Horizontal" ItemSpacing="16" LineSpacing="16">
+      <Border Classes="card" Width="320" MinHeight="220">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Entradas" />
+          <shared:EmptyStateView Glyph="△"
+                                 Message="Sin entradas registradas."
+                                 Hint="" />
+          <Button Classes="secondary"
+                  Content="Registrar entrada (próximamente)"
+                  IsEnabled="False"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320" MinHeight="220">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Salidas" />
+          <shared:EmptyStateView Glyph="△"
+                                 Message="Sin salidas registradas."
+                                 Hint="" />
+          <Button Classes="secondary"
+                  Content="Registrar salida (próximamente)"
+                  IsEnabled="False"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320" MinHeight="220">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Alertas de stock" />
+          <shared:EmptyStateView Glyph="○"
+                                 Message="Sin alertas activas."
+                                 Hint="Aquí aparecerán los productos con existencias bajas." />
+        </StackPanel>
+      </Border>
+    </WrapPanel>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="cardTitle" Text="Historial de movimientos" />
+        <shared:EmptyStateView Glyph="◇"
+                               Message="Sin movimientos registrados."
+                               Hint="" />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

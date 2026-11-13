@@ -3,39 +3,140 @@
         xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="320"
+        mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="900"
         x:Class="PosElChorolqui.Desktop.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="PosElChorolqui"
-        Width="480" Height="320"
+        Width="1440" Height="900"
+        MinWidth="1024" MinHeight="640"
         WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <StackPanel Spacing="12"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-        <TextBlock Text="PosElChorolqui"
-                   FontSize="28"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center" />
-        <TextBlock Text="{Binding StatusText}"
-                   HorizontalAlignment="Center" />
-        <TextBlock Text="{Binding ServiceName}"
-                   HorizontalAlignment="Center"
-                   IsVisible="{Binding IsHealthy}" />
-        <TextBlock Text="{Binding LastCheckedText}"
-                   HorizontalAlignment="Center"
-                   IsVisible="{Binding IsHealthy}" />
-        <Button Content="Actualizar"
-                Command="{Binding RefreshCommand}"
-                IsEnabled="{Binding !IsBusy}"
-                HorizontalAlignment="Center" />
-    </StackPanel>
+    <Grid ColumnDefinitions="264,*" Background="{DynamicResource AppBackgroundBrush}">
+
+        <!-- Sidebar: persistent across every section. -->
+        <Border Grid.Column="0"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}"
+                BorderThickness="0,0,1,0"
+                Padding="20">
+            <Grid RowDefinitions="Auto,*,Auto" RowSpacing="16">
+                <!-- Reserved space for the business visual identity (no invented data). -->
+                <StackPanel Spacing="10" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Classes="badge">
+                        <TextBlock Classes="badgeText" Text="PQ" />
+                    </Border>
+                    <StackPanel Spacing="0" VerticalAlignment="Center">
+                        <TextBlock Text="PosElChorolqui" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}" />
+                        <TextBlock Classes="muted" Text="Gestión comercial" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Internal navigation: single window, no extra windows -->
+                <ListBox Grid.Row="1"
+                         Classes="sideNav"
+                         ItemsSource="{Binding NavigationItems}"
+                         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                         SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                <Border Classes="navGlyph">
+                                    <TextBlock Classes="navGlyphText" Text="{Binding Glyph}" />
+                                </Border>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Title}"
+                                           FontSize="14"
+                                           VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Padding" Value="10,7" />
+                            <Setter Property="Margin" Value="0,2" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="MinHeight" Value="46" />
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource NavHoverBrush}" />
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+                            <Setter Property="CornerRadius" Value="10" />
+                        </Style>
+                        <Style Selector="ListBoxItem:selected TextBlock">
+                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                        </Style>
+                        <Style Selector="ListBoxItem:selected Border.navGlyph">
+                            <Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+                        </Style>
+                        <Style Selector="ListBoxItem:selected Border.navGlyph TextBlock">
+                            <Setter Property="Foreground" Value="{DynamicResource OnPrimaryBrush}" />
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
+
+                <!-- Real backend state + theme -->
+                <StackPanel Grid.Row="2" Spacing="10">
+                    <StackPanel Spacing="8" Orientation="Horizontal">
+                        <Border Classes="statusDot" Background="{DynamicResource SuccessBrush}" IsVisible="{Binding IsHealthy}" />
+                        <Border Classes="statusDot" Background="{DynamicResource DangerBrush}" IsVisible="{Binding !IsHealthy}" />
+                        <TextBlock Classes="muted" Text="{Binding StatusText}" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190" />
+                    </StackPanel>
+                    <StackPanel Spacing="6" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Classes="muted" Text="Tema oscuro" VerticalAlignment="Center" />
+                        <ToggleSwitch Classes="field" IsChecked="{Binding IsDarkTheme}" OnContent="" OffContent="" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main area -->
+        <Grid Grid.Column="1" RowDefinitions="Auto,*">
+            <!-- Topbar: connection and actions. The section title lives in each
+                 page header, so it is intentionally not repeated here. -->
+            <Border Background="{DynamicResource HeaderBackgroundBrush}"
+                    BorderBrush="{DynamicResource CardBorderBrush}"
+                    BorderThickness="0,0,0,1"
+                    Padding="24,12">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <StackPanel Spacing="6" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Classes="statusPill">
+                            <StackPanel Spacing="8" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Border Classes="statusDot" Background="{DynamicResource SuccessBrush}" IsVisible="{Binding IsHealthy}" />
+                                <Border Classes="statusDot" Background="{DynamicResource DangerBrush}" IsVisible="{Binding !IsHealthy}" />
+                                <TextBlock Classes="statusPillText" Text="{Binding ConnectionShortText}" />
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Classes="caption" Text="{Binding LastCheckedText}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Spacing="10" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Classes="muted" Text="{Binding ClockText}" VerticalAlignment="Center" />
+                        <Button Classes="secondary" Content="Actualizar" Command="{Binding RefreshCommand}" IsEnabled="{Binding !IsBusy}" />
+                        <Button Classes="secondary" Content="Configuración" Command="{Binding NavigateToSettingsCommand}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Active section -->
+            <ScrollViewer Grid.Row="1"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          Padding="24,20">
+                <ContentControl Content="{Binding CurrentView}" HorizontalContentAlignment="Stretch" />
+            </ScrollViewer>
+        </Grid>
+    </Grid>
 
 </Window>

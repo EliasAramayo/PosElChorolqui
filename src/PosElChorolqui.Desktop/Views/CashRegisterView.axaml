@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.CashRegisterView"
+             x:DataType="vm:CashRegisterViewModel">
+  <StackPanel Spacing="20">
+    <shared:PageHeaderView Title="Caja"
+                           Subtitle="Apertura, movimientos, resumen y cierre de caja. La operación real estará disponible en una etapa posterior." />
+
+    <WrapPanel Orientation="Horizontal" ItemSpacing="16" LineSpacing="16">
+      <Border Classes="card" Width="320" MinHeight="230">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Apertura" />
+          <shared:EmptyStateView Glyph="▣"
+                                 Message="La caja se encuentra cerrada."
+                                 Hint="" />
+          <Button Classes="primary"
+                  Content="Abrir caja (próximamente)"
+                  IsEnabled="False"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320" MinHeight="230">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Resumen del turno" />
+          <shared:EmptyStateView Glyph="○"
+                                 Message="Sin movimientos en el turno actual."
+                                 Hint="" />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="320" MinHeight="230">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Cierre" />
+          <shared:EmptyStateView Glyph="◇"
+                                 Message="No hay un turno abierto para cerrar."
+                                 Hint="" />
+          <Button Classes="danger"
+                  Content="Cerrar caja (próximamente)"
+                  IsEnabled="False"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+        </StackPanel>
+      </Border>
+    </WrapPanel>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="cardTitle" Text="Movimientos de caja" />
+        <shared:EmptyStateView Glyph="○"
+                               Message="Sin movimientos registrados."
+                               Hint="" />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

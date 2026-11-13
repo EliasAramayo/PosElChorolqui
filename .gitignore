@@ -450,3 +450,5 @@ publish-local/
 !*.example.json
 
 .atl/
+
+.codegraph/

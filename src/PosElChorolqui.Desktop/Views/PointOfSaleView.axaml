@@ -1,0 +1,102 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.PointOfSaleView"
+             x:DataType="vm:PointOfSaleViewModel">
+  <StackPanel Spacing="20">
+    <shared:PageHeaderView Title="Punto de venta"
+                           Subtitle="Cobre de forma ágil con mouse o teclado. La venta real estará disponible en una etapa posterior." />
+
+    <!-- Catalog ~70% / ticket ~30%, adapting to the window width. -->
+    <Grid ColumnDefinitions="7*,3*" ColumnSpacing="16">
+      <!-- Product catalog with the single protagonist search field. -->
+      <Border Classes="card" MinWidth="380">
+        <StackPanel Spacing="12">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="cardTitle" Text="Catálogo" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Classes="muted" Text="Sin productos" VerticalAlignment="Center" />
+          </Grid>
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <TextBox Classes="search"
+                     Text="{Binding SearchText}"
+                     TabIndex="0"
+                     ToolTip.Tip="Escriba el nombre o el código, o escanee el código de barras."
+                     PlaceholderText="Buscar por nombre o código, o escanear código de barras…" />
+            <Button Grid.Column="1"
+                    Classes="secondary"
+                    Content="Limpiar"
+                    Command="{Binding ClearSearchCommand}"
+                    VerticalAlignment="Stretch" />
+          </Grid>
+          <Border Classes="tableHeader">
+            <Grid ColumnDefinitions="120,*,120,100">
+              <TextBlock Classes="tableHeaderText" Text="Código" />
+              <TextBlock Classes="tableHeaderText" Grid.Column="1" Text="Nombre" />
+              <TextBlock Classes="tableHeaderRight" Grid.Column="2" Text="Precio" />
+              <TextBlock Classes="tableHeaderRight" Grid.Column="3" Text="Stock" />
+            </Grid>
+          </Border>
+          <Border Classes="chartZone" MinHeight="260">
+            <shared:EmptyStateView Glyph="○"
+                                   Message="Sin productos para mostrar."
+                                   Hint="Busque por nombre o código, o escanee el código de barras." />
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <!-- Ticket panel: wide enough to read, with the total as protagonist. -->
+      <Border Classes="card" Grid.Column="1" MinWidth="300">
+        <StackPanel Spacing="12">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="cardTitle" Text="Ticket actual" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Classes="muted" Text="Vacío" VerticalAlignment="Center" />
+          </Grid>
+
+          <shared:EmptyStateView Glyph="▣"
+                                 Message="El ticket está vacío."
+                                 Hint="Los productos agregados aparecerán aquí." />
+
+          <Separator Opacity="0.4" />
+
+          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" RowSpacing="4">
+            <TextBlock Classes="cardText" Text="Subtotal:" />
+            <TextBlock Classes="cardText" Grid.Column="1" Text="$ 0,00" HorizontalAlignment="Right" />
+            <TextBlock Classes="cardText" Grid.Row="1" Text="Descuentos:" />
+            <TextBlock Classes="cardText" Grid.Row="1" Grid.Column="1" Text="$ 0,00" HorizontalAlignment="Right" />
+          </Grid>
+
+          <Border Classes="totalZone">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="caption" Text="Total a pagar" />
+              <TextBlock Classes="totalAmount" Text="$ 0,00" HorizontalAlignment="Right" />
+            </StackPanel>
+          </Border>
+
+          <TextBlock Classes="muted" Text="Método de pago" />
+          <StackPanel Spacing="8">
+            <Button Classes="secondary" Content="Efectivo" IsEnabled="False" MinHeight="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+            <Button Classes="secondary" Content="Tarjeta" IsEnabled="False" MinHeight="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+            <Button Classes="secondary" Content="Transferencia" IsEnabled="False" MinHeight="44" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+          </StackPanel>
+
+          <Button Classes="primary"
+                  Content="Cobrar (próximamente)"
+                  IsEnabled="False"
+                  MinHeight="48"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+          <Button Classes="danger"
+                  Content="Cancelar ticket"
+                  IsEnabled="False"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center" />
+          <TextBlock Classes="caption"
+                       Text="Los cobros se habilitarán en una etapa posterior."
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center" />
+        </StackPanel>
+      </Border>
+    </Grid>
+  </StackPanel>
+</UserControl>

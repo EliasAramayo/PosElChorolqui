@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+  <StackPanel Spacing="20" MaxWidth="760" HorizontalAlignment="Left">
+    <shared:PageHeaderView Title="Configuración"
+                           Subtitle="Preferencias de la aplicación. Las opciones del negocio y los dispositivos llegarán en etapas posteriores." />
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="cardTitle" Text="Apariencia" />
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="2">
+            <TextBlock Classes="cardText" Text="Tema oscuro" />
+            <TextBlock Classes="muted" Text="Alterna entre el tema claro y el oscuro en toda la aplicación." />
+          </StackPanel>
+          <ToggleSwitch Classes="field"
+                        Grid.Column="1"
+                        IsChecked="{Binding IsDarkTheme}"
+                        OnContent="Activado"
+                        OffContent="Desactivado" />
+        </Grid>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="cardTitle" Text="Negocio" />
+        <shared:EmptyStateView Glyph="○"
+                               Message="Próximamente: nombre comercial, moneda e impuestos."
+                               Hint="" />
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="cardTitle" Text="Dispositivos" />
+        <shared:EmptyStateView Glyph="□"
+                               Message="Próximamente: impresoras, lectores de código de barras y cajón de dinero."
+                               Hint="" />
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="cardTitle" Text="Información general" />
+        <TextBlock Classes="cardText" Text="PosElChorolqui · Interfaz de escritorio · Etapa 2" />
+        <TextBlock Classes="muted" Text="El estado real del servicio local se muestra en la barra superior y en la barra lateral." />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>
