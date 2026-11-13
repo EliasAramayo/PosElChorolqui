@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.SuppliersView"
+             x:DataType="vm:SuppliersViewModel">
+  <StackPanel Spacing="20">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+      <shared:PageHeaderView Title="Proveedores"
+                             Subtitle="Directorio de proveedores. El registro completo estará disponible en una etapa posterior." />
+      <Button Classes="primary"
+              Grid.Column="1"
+              Content="Agregar proveedor (próximamente)"
+              IsEnabled="False"
+              VerticalAlignment="Center" />
+    </Grid>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+          <TextBox Classes="field"
+                   Text="{Binding SearchText}"
+                   TabIndex="0"
+                   PlaceholderText="Buscar por nombre o documento…" />
+          <Button Classes="secondary"
+                  Grid.Column="1"
+                  Content="Limpiar"
+                  Command="{Binding ClearSearchCommand}" />
+        </Grid>
+        <StackPanel Margin="0,20">
+          <shared:EmptyStateView Glyph="◇"
+                                 Message="Sin proveedores registrados."
+                                 Hint="Utilice «Agregar proveedor» cuando el registro esté disponible." />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

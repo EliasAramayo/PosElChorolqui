@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.Shared.EmptyStateView">
+  <StackPanel Spacing="10" HorizontalAlignment="Stretch">
+    <Border Classes="emptyBadge" HorizontalAlignment="Center">
+      <TextBlock Classes="emptyGlyph"
+                 Text="{Binding Glyph, RelativeSource={RelativeSource AncestorType=local:EmptyStateView}}" />
+    </Border>
+    <TextBlock Classes="emptyState"
+               Text="{Binding Message, RelativeSource={RelativeSource AncestorType=local:EmptyStateView}}" />
+    <TextBlock Classes="muted"
+               HorizontalAlignment="Center"
+               TextAlignment="Center"
+               Text="{Binding Hint, RelativeSource={RelativeSource AncestorType=local:EmptyStateView}}" />
+  </StackPanel>
+</UserControl>

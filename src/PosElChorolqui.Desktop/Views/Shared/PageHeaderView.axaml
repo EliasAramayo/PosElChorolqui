@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.Shared.PageHeaderView">
+  <StackPanel Spacing="4">
+    <TextBlock Classes="sectionTitle"
+               Text="{Binding Title, RelativeSource={RelativeSource AncestorType=local:PageHeaderView}}" />
+    <TextBlock Classes="pageSubtitle"
+               Text="{Binding Subtitle, RelativeSource={RelativeSource AncestorType=local:PageHeaderView}}" />
+  </StackPanel>
+</UserControl>

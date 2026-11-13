@@ -1,0 +1,82 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+             xmlns:shared="using:PosElChorolqui.Desktop.Views.Shared"
+             x:Class="PosElChorolqui.Desktop.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel">
+  <StackPanel Spacing="20">
+    <shared:PageHeaderView Title="Tablero"
+                           Subtitle="Resumen general del negocio. Los indicadores estarán disponibles cuando haya operaciones registradas." />
+
+    <!-- Indicator cards: readable width, wrapping with the window size. -->
+    <WrapPanel Orientation="Horizontal" ItemSpacing="16" LineSpacing="16">
+      <Border Classes="card" Width="280">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Ventas de hoy" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="Aún no hay ventas registradas." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="280">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Productos" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="El catálogo está vacío por el momento." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="280">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Stock bajo" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="No hay alertas de inventario." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Width="280">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="cardTitle" Text="Ticket promedio" />
+          <TextBlock Classes="keyValue" Text="—" />
+          <TextBlock Classes="muted" Text="Sin datos disponibles." />
+        </StackPanel>
+      </Border>
+    </WrapPanel>
+
+    <!-- Balanced chart and recent-movements zones. -->
+    <Grid ColumnDefinitions="2*,*" ColumnSpacing="16">
+      <Border Classes="card" MinWidth="380">
+        <StackPanel Spacing="10">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="cardTitle" Text="Ventas recientes" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Classes="muted" Text="Últimos 7 días" VerticalAlignment="Center" />
+          </Grid>
+          <Border Classes="chartZone" MinHeight="220">
+            <shared:EmptyStateView Glyph="◇"
+                                   Message="Sin datos disponibles para el gráfico."
+                                   Hint="El gráfico aparecerá cuando haya ventas registradas." />
+          </Border>
+        </StackPanel>
+      </Border>
+      <Border Classes="card" Grid.Column="1" MinWidth="260">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="cardTitle" Text="Movimientos recientes" />
+          <shared:EmptyStateView Glyph="○"
+                                 Message="Sin movimientos registrados."
+                                 Hint="La actividad más reciente aparecerá aquí." />
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <!-- Organized quick actions; all disabled until the stages arrive. -->
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="cardTitle" Text="Acciones rápidas" />
+        <TextBlock Classes="muted" Text="Accesos directos a las tareas más frecuentes. Se activarán en etapas posteriores." />
+        <WrapPanel Orientation="Horizontal" ItemSpacing="10" LineSpacing="10">
+          <Button Classes="primary" Content="Nueva venta (próximamente)" IsEnabled="False" />
+          <Button Classes="secondary" Content="Agregar producto (próximamente)" IsEnabled="False" />
+          <Button Classes="secondary" Content="Apertura de caja (próximamente)" IsEnabled="False" />
+          <Button Classes="secondary" Content="Ver reportes (próximamente)" IsEnabled="False" />
+        </WrapPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>
