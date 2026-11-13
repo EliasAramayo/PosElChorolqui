@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PosElChorolqui.Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="320"
+        x:Class="PosElChorolqui.Desktop.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PosElChorolqui"
+        Width="480" Height="320"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <StackPanel Spacing="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <TextBlock Text="PosElChorolqui"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding StatusText}"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="{Binding ServiceName}"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding IsHealthy}" />
+        <TextBlock Text="{Binding LastCheckedText}"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding IsHealthy}" />
+        <Button Content="Actualizar"
+                Command="{Binding RefreshCommand}"
+                IsEnabled="{Binding !IsBusy}"
+                HorizontalAlignment="Center" />
+    </StackPanel>
+
+</Window>
